@@ -1,0 +1,43 @@
+<div class="parent" >
+  
+  <button *ngIf="state === undefined" @startButton
+     class="start" (click)="start()">
+      GALLERY
+   </button>
+
+
+  <ng-container *ngIf="!(state === undefined)">
+    
+    <app-slide [@firstSlide]="{value: state, params: {enter, leave}}">
+      {{ data[index] }}
+    </app-slide>
+
+    <app-slide [@secondSlide]="{value: state, params: {enter, leave}}">
+      {{ data[index] }}
+    </app-slide>
+    
+      
+     <app-list [@items]="data.length" class="dot-container">
+        <app-item *ngFor="let data of data; let i = index"
+                  (click)="activate(i)"
+                  [class.active]="i === index">
+          {{ i + 1}}
+        </app-item>
+     </app-list>
+          
+        
+
+      <app-arrow (click)="left('-100%', '100%')" 
+                  @leftArrow class="left-arrow">
+      </app-arrow>
+      <app-arrow (click)="right('100%', '-100%')" 
+                  @rightArrow class="right-arrow">
+      </app-arrow>
+      
+      
+  </ng-container>
+  
+  
+   
+</div>
+  
